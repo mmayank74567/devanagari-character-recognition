@@ -33,14 +33,11 @@ print('Total images in test set are', len(test_image_path))
 
 #images to arrays
 print('Converting training images into arrays')
-itr = 0
 for t in train_image_path:
-  itr = itr+1
-  if itr%1000 == 0:
-    print(itr)
-  image = cv2.imread(t,0)
-  #0 reads the images in grayscale mode
+  image = cv2.imread(t)
+  image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
   image = img_to_array(image)
+  image = np.uint8(image)
   train_data.append(image)
   label = t.split(os.path.sep)[-2]
   train_labels.append(label)
@@ -54,16 +51,14 @@ print('Done!')
 
 
 print('Converting testing images into arrays')
-itr = 0
 for t in test_image_path:
-  itr = itr+1
-  if itr%1000 == 0:
-    print(itr)
-  image = cv2.imread(t,0)
-  image = img_to_array(image)
-  test_data.append(image)
-  test_label = t.split(os.path.sep)[-2]
-  test_labels.append(test_label)
+    image = cv2.imread(t)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image = img_to_array(image)
+    image = np.uint8(image)
+    test_data.append(image)
+    test_label = t.split(os.path.sep)[-2]
+    test_labels.append(test_label)
 print('Done!') 
 
 print('Storing the arrays')
