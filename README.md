@@ -1,7 +1,7 @@
 # Devanagari Character Recognition using ResNet
 
 ## Introduction
-This is the code for our submission to IEEE 9th International Conference on Reliability, Infocom Technologies and Optimization (ICRITO'2021). The work includes creating an image recognition model to classify characters written in Devanagari script. The model is based on the ResNet architecture and accomodates 85 convolution layers. This code can also be implemented to perform other image classification tasks by changing the hyper-parameters and design architecture according to need. 
+This is the code for an image recognition model to classify characters written in Devanagari script. The model is based on the ResNet architecture and accomodates 85 convolution layers. This code can also be implemented to perform other image classification tasks by changing the hyper-parameters and design architecture according to need. 
 
 
 ## Dataset
@@ -55,3 +55,32 @@ The structure of the directory is represented below:
 * The `learningratedecay.py` defines a custom learning rate function which is automatically applied during the training using the `LearningRateScheduler` class of the Keras library.
 
 ### ResNet
+The ResNet architecture is implemented in the `resnet.py` inside the `nn` module. The bottleneck and pre-activation version of the ResNet is implemented. 
+
+The `residual_module` function within the `ResNet` class defines the structure of a residual module. Three `CONV` blocks with `K/4` filters for first and second block and `K` filters for the third block are stacked. Each `CONV` block holds a series of `BatchNormalization -> ReLU -> Conv2D` layers. 
+
+The residual blocks from the `residual_module` function are stacked together using the `build` function as per the desired requirements. The `stride` and `filters` parameters of the function are given as <i>lists</i>. `stride[i]` element describes the number of residual modules in the <em>i <sup>th</sup></em>  set of the network architectures. `filter[i+1]` defines the number of filters `K` used by all the `CONV` blocks in the <em>i <sup>th</sup></em> set. Spatial dimensions are reduced when moving from set <em>i</em> to set <em>i+1</em>.
+
+The network architecture starts with a batch normalization layer. It is followed by a ` CONV ` layer with a total of `filter[0]` filters. After these two initial layers, all the sets of residual modules are stacked together. At last, average pooling and the softmax classifier is applied. 
+
+### Training
+Deploy the `train.py` file to initiate the training process. To execute the script, run --
+```shell
+python train.py --npy [path to the folder with the .npy files] --output [path to the output folder] --epochs [Number of epochs you wish to train the model] --lrate [Initial learning rate for the training] --checkpoint [Path to (checkpoints) folder to store the model checkpoints during training]]
+```
+
+A sample command line argument is demonstrated below:
+```shell
+python train.py --output output --npy output --epochs 50 --lrate 0.01 --checkpoint checkpoints
+```
+
+In our implementation, we have initialized the `stride` and `filters` arguments as (9, 9, 9) and (64, 64, 128, 256) respectively. The first `CONV` layer (before the residual module stacking), learns `filter[0]` number of filters, i.e. 64. The first set contains `stride[0]`, i.e. 9 residual modules. These 9 residual modules in the first set learn `filter[1]` number of filters, i.e. 64. SImilarly, the second set has 9 residual modules, each learning 128 filters and the third set has 9 residual modules, with 256 filters applied to each. The plot of our network architecture is shown in `model.png` file. 
+
+While training, the `JSON` file and a loss vs accuracy plot will be stored in the folder provided within the `--output` argument after every epoch. Model checkpoints will be stored in the folder provided within the `--checkpoint` argument after every 5 epochs (or the number set by the user). In the event of an interruption, these checkpoints can be used to restart training from a specific point in the history by mentioning the model path and the epoch number to start training from again in the `train.py`file.
+
+## Acknowledgement
+* The code implementation is inspired by the resources provided at [PyImageSearch](https://www.pyimagesearch.com/) website.
+
+
+
+
