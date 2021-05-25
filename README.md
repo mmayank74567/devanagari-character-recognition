@@ -3,7 +3,26 @@
 ## Introduction
 This is the code for an image recognition model to classify characters written in Devanagari script. The model is based on the ResNet architecture and accomodates 85 convolution layers. This code can also be implemented to perform other image classification tasks by changing the hyper-parameters and design architecture according to need. 
 
-
+## Installation
+* Download Anaconda or Miniconda distribution from their [website](https://www.anaconda.com/products/individual).
+* Clone this repository
+```shell
+git clone https://github.com/mmayank74567/devanagari-character-recognition.git
+```
+* Create an environment and install the dependencies using the `env.yml` file.
+```shell
+conda env create -f env.yml
+```
+An environment by the name `dev_env` will be created. Run the following command to ensure that an environment with this name has been successfully created.
+```shell
+conda env list
+```
+* Activate the environment to run the code using the installed dependencies.
+```shell
+conda activate dev_env
+#change directory 
+cd devanagari-character-recognition/
+```
 ## Dataset
 We used the Devanagari Handwritten Character Dataset (DHCD) published in [Deep learning based large scale handwritten Devanagari character recognition](https://ieeexplore.ieee.org/document/7400041). The dataset can be downloaded from [here](https://archive.ics.uci.edu/ml/datasets/Devanagari+Handwritten+Character+Dataset). This dataset holds 91,000 grayscale images of 32x32 pixel dimensions across 46 different categories (36 consonants and 10 numeral classes).
 
@@ -79,8 +98,9 @@ In our implementation, we have initialized the `stride` and `filters` arguments 
 While training, the `JSON` file and a loss vs accuracy plot will be stored in the folder provided within the `--output` argument after every epoch. Model checkpoints will be stored in the folder provided within the `--checkpoint` argument after every 5 epochs (or the number set by the user). In the event of an interruption, these checkpoints can be used to restart training from a specific point in the history by mentioning the model path and the epoch number to start training from again in the `train.py`file.
 
 ## Acknowledgement
-* The code implementation is inspired by the resources provided at [PyImageSearch](https://www.pyimagesearch.com/) website.
+* The code implementation is inspired by the resources provided on [PyImageSearch](https://www.pyimagesearch.com/) website.
 
 
 
 
+on
