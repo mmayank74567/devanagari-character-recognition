@@ -98,9 +98,8 @@ In our implementation, we have initialized the `stride` and `filters` arguments 
 While training, the `JSON` file and a loss vs accuracy plot will be stored in the folder provided within the `--output` argument after every epoch. Model checkpoints will be stored in the folder provided within the `--checkpoint` argument after every 5 epochs (or the number set by the user). In the event of an interruption, these checkpoints can be used to restart training from a specific point in the history by mentioning the model path and the epoch number to start training from again in the `train.py`file.
 
 ## Acknowledgement
-* The code implementation is inspired by the resources provided on [PyImageSearch](https://www.pyimagesearch.com/) website.
+* The code implementation is inspired by the resources provided on the [PyImageSearch](https://www.pyimagesearch.com/) website.
 
 
 
 
-on
