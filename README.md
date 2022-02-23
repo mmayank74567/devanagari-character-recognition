@@ -100,6 +100,19 @@ While training, the `JSON` file and a loss vs accuracy plot will be stored in th
 ## Acknowledgement
 * The code implementation is inspired by the resources provided on the [PyImageSearch](https://www.pyimagesearch.com/) website.
 
+## Citation
+```
+@INPROCEEDINGS{9582192,
+  author={Mishra, Mayank and Choudhury, Tanupriya and Sarkar, Tanmay},
+  booktitle={2021 IEEE India Council International Subsections Conference (INDISCON)}, 
+  title={Devanagari Handwritten Character Recognition}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={1-6},
+  doi={10.1109/INDISCON53343.2021.9582192}}
+  ```
+
 
 
 
